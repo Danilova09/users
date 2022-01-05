@@ -1,1 +1,80 @@
-<p>save-user works!</p>
+<div class="form-block">
+  <h4 class="text-center">Create user</h4>
+  <form class="form" #userForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name"
+             class="form-control"
+             #userName="ngModel"
+             ngModel>
+    </div>
+    <div class="form-group">
+      <label for="userSurname">Surname</label>
+      <input type="text" name="userSurname" id="userSurname"
+             class="form-control"
+             #userSurname="ngModel"
+             ngModel>
+    </div>
+    <div class="form-group">
+      <label for="userPatronymic">Patronymic</label>
+      <input type="text" name="userPatronymic" id="userPatronymic"
+             class="form-control"
+             #userPatronymic="ngModel"
+             ngModel>
+    </div>
+    <div class="form-group">
+      <label for="userPhoneNumber">userPhoneNumber</label>
+      <input type="text" name="userPhoneNumber" id="userPhoneNumber"
+             class="form-control"
+             #userPhoneNumber="ngModel"
+             ngModel>
+    </div>
+    <div class="form-group">
+      <label for="userPlaceOfWorkStudy">Place of work/study</label>
+      <input type="text" name="userPlaceOfWorkStudy" id="userPlaceOfWorkStudy"
+             class="form-control"
+             #userPlaceOfWorkStudy="ngModel"
+             ngModel>
+    </div>
+
+    <div class="t-shirt-option py-5">
+      <p class="pb-1">T-Shirt option</p>
+      <div class="form-check pb-1">
+        <input class="form-check-input" type="radio" name="userTShirt"
+               id="userMaleTShirt" value="male">
+        <label class="form-check-label" for="userMaleTShirt">
+          Male
+        </label>
+      </div>
+      <div class="form-check pb-1">
+        <input class="form-check-input" type="radio" name="userTShirt" id="userFemaleTShirt" value="female">
+        <label class="form-check-label" for="userFemaleTShirt">
+          Female
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="size">Size</label>
+      <select class="form-control" id="size"
+              name="userSize"
+              #userSize="ngModel"
+              ngModel>
+        <option selected></option>
+        <option value="s">s</option>
+        <option value="m">m</option>
+        <option value="l">xl</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea name="description" id="description" cols="30" rows="10"
+                class="form-control"
+                #description="ngModel"
+                ngModel
+      ></textarea>
+    </div>
+    <button class="btn btn-secondary my-3">create</button>
+  </form>
+</div>
