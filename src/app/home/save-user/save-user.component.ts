@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { NgForm, NgModel } from '@angular/forms';
+import { max } from 'rxjs/operators';
 
 @Component({
   selector: 'app-save-user',
@@ -8,12 +9,18 @@ import { NgForm } from '@angular/forms';
 })
 export class SaveUserComponent implements OnInit {
   @ViewChild('userForm') userForm!: NgForm;
+  currentSymbols = 300;
+  maxSymbols = 300;
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onSubmit() {
-    console.log(this.userForm);
+  onSubmit(description: NgModel) {
+    console.log(description.value);
+  }
+
+  getSymbolsCount(symbols: number) {
+    this.currentSymbols = this.maxSymbols - symbols;
   }
 }

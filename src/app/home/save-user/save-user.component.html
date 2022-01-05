@@ -1,80 +1,152 @@
 <div class="form-block">
   <h4 class="text-center">Create user</h4>
-  <form class="form" #userForm="ngForm" (ngSubmit)="onSubmit()">
+  <form class="form"
+        #userForm="ngForm"
+        (ngSubmit)="onSubmit(description)">
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" name="name" id="name"
+      <input type="text"
+             name="name"
+             id="name"
+             [class]="userForm.touched && name.errors?.required ? 'is-invalid form-control': 'form-control'"
+             #name="ngModel"
+             required
+             ngModel>
+      <small *ngIf="name.touched && name.errors?.required"
+             id="userName"
+             class="text-danger">
+        Enter your Name
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="surname">Surname</label>
+      <input type="text"
+             name="surname"
+             id="surname"
+             [class]="surname.touched && name.errors?.required ? 'is-invalid form-control': 'form-control'"
+             #surname="ngModel"
+             required
+             ngModel>
+      <small *ngIf="surname.touched && surname.errors?.required"
+             class="text-danger">
+        Enter your Surname
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="patronymic">Patronymic</label>
+      <input type="text"
+             name="patronymic"
+             id="patronymic"
+             #patronymic="ngModel"
+             [class]="patronymic.touched && patronymic.errors?.required ? 'is-invalid form-control': 'form-control'"
+             required
+             ngModel>
+      <small *ngIf="patronymic.touched && patronymic.errors?.required"
+             class="text-danger">
+        Enter your Patronymic
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber">Phone number</label>
+      <input type="text"
+             name="phoneNumber"
+             id="phoneNumber"
              class="form-control"
-             #userName="ngModel"
+             #phoneNumber="ngModel"
+             required
              ngModel>
     </div>
     <div class="form-group">
-      <label for="userSurname">Surname</label>
-      <input type="text" name="userSurname" id="userSurname"
-             class="form-control"
-             #userSurname="ngModel"
+      <label for="placeOfWorkStudy">Place of work/study</label>
+      <input type="text"
+             name="placeOfWorkStudy"
+             id="placeOfWorkStudy"
+             #placeOfWorkStudy="ngModel"
+             [class]="placeOfWorkStudy.touched && placeOfWorkStudy.errors?.required ? 'is-invalid form-control': 'form-control'"
+             required
              ngModel>
+      <small *ngIf="placeOfWorkStudy.touched && placeOfWorkStudy.errors?.required"
+             class="text-danger">
+        Enter your place of work/study
+      </small>
     </div>
-    <div class="form-group">
-      <label for="userPatronymic">Patronymic</label>
-      <input type="text" name="userPatronymic" id="userPatronymic"
-             class="form-control"
-             #userPatronymic="ngModel"
-             ngModel>
-    </div>
-    <div class="form-group">
-      <label for="userPhoneNumber">userPhoneNumber</label>
-      <input type="text" name="userPhoneNumber" id="userPhoneNumber"
-             class="form-control"
-             #userPhoneNumber="ngModel"
-             ngModel>
-    </div>
-    <div class="form-group">
-      <label for="userPlaceOfWorkStudy">Place of work/study</label>
-      <input type="text" name="userPlaceOfWorkStudy" id="userPlaceOfWorkStudy"
-             class="form-control"
-             #userPlaceOfWorkStudy="ngModel"
-             ngModel>
-    </div>
-
     <div class="t-shirt-option py-5">
       <p class="pb-1">T-Shirt option</p>
       <div class="form-check pb-1">
-        <input class="form-check-input" type="radio" name="userTShirt"
-               id="userMaleTShirt" value="male">
-        <label class="form-check-label" for="userMaleTShirt">
+        <input class="form-check-input"
+               type="radio"
+               name="TShirt"
+               id="maleTShirt"
+               value="male"
+               #gender="ngModel"
+               ngModel
+               required
+        >
+        <label class="form-check-label"
+               for="maleTShirt">
           Male
         </label>
       </div>
       <div class="form-check pb-1">
-        <input class="form-check-input" type="radio" name="userTShirt" id="userFemaleTShirt" value="female">
-        <label class="form-check-label" for="userFemaleTShirt">
+        <input class="form-check-input"
+               type="radio"
+               name="TShirt"
+               id="femaleTShirt"
+               value="female"
+               required
+               ngModel
+        >
+        <label class="form-check-label"
+               for="femaleTShirt">
           Female
         </label>
       </div>
+      <small *ngIf="userForm.submitted && placeOfWorkStudy.errors?.required"
+             class="text-danger">
+        Choose T-Shirt's gender
+      </small>
     </div>
-
     <div class="form-group">
       <label for="size">Size</label>
-      <select class="form-control" id="size"
-              name="userSize"
-              #userSize="ngModel"
+      <select class="form-control"
+              id="size"
+              name="size"
+              #size="ngModel"
+              [class]="size.touched && size.errors?.required ? 'is-invalid form-control': 'form-control'"
+              required
               ngModel>
         <option selected></option>
         <option value="s">s</option>
         <option value="m">m</option>
         <option value="l">xl</option>
       </select>
+      <small *ngIf="size.touched && size.errors?.required"
+             class="text-danger">
+        Choose size
+      </small>
     </div>
-
     <div class="form-group">
-      <label for="description">Description</label>
-      <textarea name="description" id="description" cols="30" rows="10"
-                class="form-control"
+      <label for="description">Description. You have <b>{{ currentSymbols }}</b> left</label>
+      <textarea name="description" (input)="getSymbolsCount(description.value.length)"
+                id="description"
+                cols="30"
+                rows="10"
+                [class]="description.touched && description.errors?.required ? 'is-invalid form-control': 'form-control'"
                 #description="ngModel"
+                maxlength="300"
+                required
                 ngModel
       ></textarea>
+      <small *ngIf="description.touched && description.errors?.required"
+             class="text-danger">
+        Enter description
+      </small>
+      <small *ngIf="description.touched && description.errors?.maxlength"
+             class="text-danger">
+        Description should contain less then 300 symbols
+      </small>
     </div>
     <button class="btn btn-secondary my-3">create</button>
   </form>
 </div>
+
