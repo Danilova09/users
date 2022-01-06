@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './app-not-found.component';
@@ -9,20 +8,26 @@ import { HeaderComponent } from './header/header.component';
 import { SaveUserComponent } from './home/save-user/save-user.component';
 import { UsersComponent } from './users/users.component';
 import { FormsModule } from '@angular/forms';
+import { RegisteredComponent } from './app-registered.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UserItemComponent } from './users/user-item/user-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent,
     HomeComponent,
     HeaderComponent,
     SaveUserComponent,
     UsersComponent,
+    RegisteredComponent,
+    NotFoundComponent,
+    UserItemComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

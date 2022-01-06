@@ -1,1 +1,12 @@
-<p>users works!</p>
+<div class="users-block">
+  <h4 class="text-center">Users</h4>
+  <div class="text-center my-5" *ngIf="isFetchingUsers">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div class="users-list" *ngIf="!isFetchingUsers">
+    <app-user-item *ngFor="let user of users"
+                   [user]="user"></app-user-item>
+  </div>
+</div>
