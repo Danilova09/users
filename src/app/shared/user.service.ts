@@ -65,4 +65,9 @@ export class UserService {
     // void this.router.navigate(['/registered']);
   }
 
+  removeUser(user: User) {
+    this.http.delete(`https://users-a9330-default-rtdb.firebaseio.com/users/${user.id}.json`)
+      .subscribe();
+    this.fetchUsersData();
+  }
 }
