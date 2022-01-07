@@ -12,6 +12,7 @@ const routes: Routes = [
     ]},
   {path: 'users', component: UsersComponent},
   {path: 'registered', component: RegisteredComponent},
+  {path: 'users/:id/edit', component: SaveUserComponent},
   {path: '**', component: NotFoundComponent},
 ];
 

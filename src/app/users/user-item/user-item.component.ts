@@ -20,4 +20,8 @@ export class UserItemComponent implements OnInit {
   remove() {
     this.userService.removeUser(this.user);
   }
+
+  edit() {
+    this.userService.editUser(this.user);
+  }
 }

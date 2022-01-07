@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { RegisteredComponent } from './app-registered.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserItemComponent } from './users/user-item/user-item.component';
+import { ValidatePhoneDirective } from './validate-phone.directive';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { UserItemComponent } from './users/user-item/user-item.component';
     RegisteredComponent,
     NotFoundComponent,
     UserItemComponent,
+    ValidatePhoneDirective,
   ],
   imports: [
     BrowserModule,
