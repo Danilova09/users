@@ -1,10 +1,10 @@
 .nav-link {
-  color: rgba(0,0,0,.9);
+  color: rgba(0, 0, 0, .9);
   border-bottom: 2px solid transparent;
 }
 
 .nav-link:hover,
-.active-link{
+.active-link {
   border-bottom: 2px solid #000;
 }
 

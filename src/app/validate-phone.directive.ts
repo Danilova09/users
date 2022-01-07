@@ -1,5 +1,5 @@
-import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorFn } from '@angular/forms';
 import { Directive } from '@angular/core';
+import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorFn } from '@angular/forms';
 
 export function phoneValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -8,7 +8,7 @@ export function phoneValidator(): ValidatorFn {
       return null;
     }
     return {phone: true};
-  }
+  };
 }
 
 @Directive({

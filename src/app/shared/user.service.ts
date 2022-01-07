@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { User } from './user.model';
 import { Subject } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +14,9 @@ export class UserService {
   fetchingUsers = new Subject<boolean>();
 
   constructor(
-    public router: Router,
-    public http: HttpClient,
-  ) {
-  }
+    private router: Router,
+    private http: HttpClient,
+  ) {}
 
   fetchUsersData() {
     this.fetchingUsers.next(true);
@@ -41,6 +40,20 @@ export class UserService {
     });
   }
 
+  fetchUser(id: string) {
+    return this.http.get<User | null>(`https://users-a9330-default-rtdb.firebaseio.com/users/${id}.json`).pipe(
+      map(result => {
+        if (!result) {
+          return null;
+        }
+        return new User(
+          id, result.name, result.surname,
+          result.patronymic, result.phoneNumber,
+          result.placeOfWorkStudy, result.TShirt,
+          result.size, result.description);
+      }));
+  }
+
   createUser(user: User) {
     const body = {
       name: user.name,
@@ -52,10 +65,10 @@ export class UserService {
       size: user.size,
       description: user.description,
     };
-    this.http.post('https://users-a9330-default-rtdb.firebaseio.com/users.json', body)
-      .subscribe();
-    this.fetchUsersData();
-    // void this.router.navigate(['/registered']);
+    return this.http.post('https://users-a9330-default-rtdb.firebaseio.com/users.json', body)
+      .pipe(tap(() => {
+        void this.router.navigate(['/registered']);
+      }));
   }
 
   editUser(user: User) {
@@ -69,15 +82,13 @@ export class UserService {
       size: user.size,
       description: user.description,
     };
-    this.http.put(`https://users-a9330-default-rtdb.firebaseio.com/users/${user.id}.json`, body)
-      .subscribe();
-    void this.router.navigate(([`/users/:${user.id}/edit`]));
-    this.fetchUsersData();
+    return this.http.put(`https://users-a9330-default-rtdb.firebaseio.com/users/${user.id}.json`, body)
+      .pipe(tap(() => {
+        void this.router.navigate(['/']);
+      }));
   }
 
   removeUser(user: User) {
-    this.http.delete(`https://users-a9330-default-rtdb.firebaseio.com/users/${user.id}.json`)
-      .subscribe();
-    this.fetchUsersData();
+    return this.http.delete(`https://users-a9330-default-rtdb.firebaseio.com/users/${user.id}.json`);
   }
 }

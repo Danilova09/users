@@ -5,13 +5,14 @@ import { AppComponent } from './app.component';
 import { NotFoundComponent } from './app-not-found.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
-import { SaveUserComponent } from './home/save-user/save-user.component';
-import { UsersComponent } from './users/users.component';
+import { SaveUserComponent } from './save-user/save-user.component';
+import { UsersComponent } from './home/users/users.component';
 import { FormsModule } from '@angular/forms';
 import { RegisteredComponent } from './app-registered.component';
 import { HttpClientModule } from '@angular/common/http';
-import { UserItemComponent } from './users/user-item/user-item.component';
+import { UserItemComponent } from './home/users/user-item/user-item.component';
 import { ValidatePhoneDirective } from './validate-phone.directive';
+
 
 @NgModule({
   declarations: [
@@ -34,4 +35,4 @@ import { ValidatePhoneDirective } from './validate-phone.directive';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
